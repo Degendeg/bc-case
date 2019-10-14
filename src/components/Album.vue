@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-md-3 col-sm-4 col-sx-12" v-for="(photo, index) in photos" :key="photo.id" @click="showPhoto(index)">
           <div class="card" :ref="`grid-img-${index}`" >
-            <img :src="photo.url" class="card-img-top">
+            <img :src="photo.url" class="card-img-top" style="height: 220px">
             <div class="card-body">
               <h5 class="card-description">{{photo.title}}</h5>
             </div>

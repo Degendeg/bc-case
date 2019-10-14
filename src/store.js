@@ -84,33 +84,47 @@ export default new Vuex.Store({
 
   getters: {
     users: (state) => {
-      return state.users
+	  if (state.users) {
+        return state.users
+	  }
     },
 
     user: (state) => (id) => {
-      return state.users.find(u => u.id == id)
+	  if (state.users) {
+        return state.users.find(u => u.id == id)
+	  }
     },
 
     albums: (state) => (userId) => {
-      return state.albums.filter(a => a.userId == userId)
+	  if (state.albums) {
+        return state.albums.filter(a => a.userId == userId)
+	  }
     },
 
     album: (state) => (id) => {
-      return state.albums.find(a => a.id == id)
+	  if (state.albums) {
+        return state.albums.find(a => a.id == id)
+	  }
     },
 
     photos: (state) => (albumId) => {
-      return state.photos.filter(p => p.albumId == albumId)
+	  if (state.photos) {
+        return state.photos.filter(p => p.albumId == albumId)
+	  }
     },
 
     pageIsLoading: (state) => {
-      return state.pageIsLoading
+	  if (state) {
+        return state.pageIsLoading
+	  }
     },
 
     breadcrumbs: (state) => {
-      return state.crumbs.sort((a, b) => {
-        return a.level < b.level
-      })
+	  if (state) {
+        return state.crumbs.sort((a, b) => {
+          return a.level < b.level
+        })
+	  }
     }
   }
 })
