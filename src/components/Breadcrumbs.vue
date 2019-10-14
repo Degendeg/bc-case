@@ -1,0 +1,46 @@
+<template>
+  <nav class="navbar navbar-light bg-light">
+    <ul class="nav breadcrumb">
+      <li class="breadcrumb-item" v-for="(bc, index) in breadcrumbs" :key="index">
+        <router-link :to="bc.link" :class="{ 'active' : (index == breadcrumbs.length - 1) }">{{bc.title}}</router-link>
+      </li>
+    </ul>
+  </nav>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  name: 'breadcrumb',
+
+  computed: {
+    ...mapGetters([
+      'breadcrumbs',
+    ])
+  }
+}
+</script>
+
+<style scoped>
+  .active{
+    color: #828282;
+    pointer-events: none;
+    cursor: default;
+  }
+  
+  .navbar {
+	width: 60vw;
+	margin-left: auto;
+	margin-right: auto;
+    background: #ddddd !important;
+  }
+
+  .nav {
+    margin: 0;
+  }
+
+  .breadcrumb {
+    background-color: transparent;
+  }
+</style>
