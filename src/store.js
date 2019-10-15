@@ -15,15 +15,15 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    initializeData (state) {
+    initializeData(state) {
       state.isLoading = true
       const favorites = JSON.parse(window.localStorage.getItem('favorites')) || []
 
       Promise.all([
-        axios.get('https://jsonplaceholder.typicode.com/users'),
-        axios.get('https://jsonplaceholder.typicode.com/albums'),
-        axios.get('https://jsonplaceholder.typicode.com/photos'),
-      ])
+          axios.get('https://jsonplaceholder.typicode.com/users'),
+          axios.get('https://jsonplaceholder.typicode.com/albums'),
+          axios.get('https://jsonplaceholder.typicode.com/photos'),
+        ])
         .then(result => {
           state.users = result[0].data.map(user => {
             user.isFavorite = favorites.indexOf(user.id) > -1
@@ -36,7 +36,7 @@ export default new Vuex.Store({
         })
     },
 
-    addBreadcrumb (state, crumbs) {
+    addBreadcrumb(state, crumbs) {
       crumbs.forEach(crumb => {
         state.crumbs = state.crumbs.filter(c => {
           return c.level < crumb.level
@@ -45,38 +45,45 @@ export default new Vuex.Store({
       })
     },
 
-    removeFavorite (state, id) {
+    removeFavorite(state, id) {
       state.users.find(u => u.id == id).isFavorite = false
     },
 
-    addFavorite (state, id) {
+    addFavorite(state, id) {
       state.users.find(u => u.id == id).isFavorite = true
     },
 
-    updateFavoritesStore (state) {
+    updateFavoritesStore(state) {
       window.localStorage.setItem('favorites', JSON.stringify(
         state.users
-          .filter(user => user.isFavorite)
-          .map(user => user.id))
-      )
+        .filter(user => user.isFavorite)
+        .map(user => user.id)))
     }
   },
 
   actions: {
-    initialize ({commit}) {
+    initialize({
+      commit
+    }) {
       commit('initializeData')
     },
 
-    setBreadcrumb ({commit}, crumbs) {
+    setBreadcrumb({
+      commit
+    }, crumbs) {
       commit('addBreadcrumb', crumbs)
     },
 
-    removeFavorite({commit}, userId) {
+    removeFavorite({
+      commit
+    }, userId) {
       commit('removeFavorite', userId)
       commit('updateFavoritesStore')
     },
 
-    addFavorite({commit}, userId) {
+    addFavorite({
+      commit
+    }, userId) {
       commit('addFavorite', userId)
       commit('updateFavoritesStore')
     }
@@ -84,47 +91,47 @@ export default new Vuex.Store({
 
   getters: {
     users: (state) => {
-	  if (state.users) {
+      if (state.users) {
         return state.users
-	  }
+      }
     },
 
     user: (state) => (id) => {
-	  if (state.users) {
+      if (state.users) {
         return state.users.find(u => u.id == id)
-	  }
+      }
     },
 
     albums: (state) => (userId) => {
-	  if (state.albums) {
+      if (state.albums) {
         return state.albums.filter(a => a.userId == userId)
-	  }
+      }
     },
 
     album: (state) => (id) => {
-	  if (state.albums) {
+      if (state.albums) {
         return state.albums.find(a => a.id == id)
-	  }
+      }
     },
 
     photos: (state) => (albumId) => {
-	  if (state.photos) {
+      if (state.photos) {
         return state.photos.filter(p => p.albumId == albumId)
-	  }
+      }
     },
 
     pageIsLoading: (state) => {
-	  if (state) {
+      if (state) {
         return state.pageIsLoading
-	  }
+      }
     },
 
     breadcrumbs: (state) => {
-	  if (state) {
+      if (state) {
         return state.crumbs.sort((a, b) => {
           return a.level < b.level
         })
-	  }
+      }
     }
   }
 })
