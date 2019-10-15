@@ -30,34 +30,35 @@ export default {
 </script>
 
 <style>
-  #app {
-    font-family: 'Lato', Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: #2d3f52;
-  }
-  
-  h1 {
-	font-size: 2rem !important;
-  }
-  
-  .container {
-    .header {
-      margin: 4em 0;
-      h3 {
-        display: inline;
-        font-size: 1em;
-        margin-bottom: 30px;
-        font-style: italic;
-      }
+#app {
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #2d3f52;
+}
+
+h1 {
+  font-size: 2rem !important;
+}
+
+.container {
+  .header {
+    margin: 4em 0;
+
+    h3 {
+      display: inline;
+      font-size: 1em;
+      margin-bottom: 30px;
+      font-style: italic;
     }
   }
+}
 
-  .navbar {
-    margin-bottom: 1em;
-  }
+.navbar {
+  margin-bottom: 1em;
+}
 
-  i:hover {
-    color: #9CADAE;
-	cursor: pointer;
-  }
+i:hover {
+  color: #9CADAE;
+  cursor: pointer;
+}
 </style>
