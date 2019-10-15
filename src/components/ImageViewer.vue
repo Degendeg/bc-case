@@ -37,13 +37,16 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
-      startingOffset: { x: 0, y: 0 }
+      startingOffset: {
+        x: 0,
+        y: 0
+      }
     }
   },
 
-  created () {
+  created() {
     // Setup keypress-events for left/right arrows
     const keyPressMap = {
       37: this.prevImg,
@@ -96,72 +99,85 @@ export default {
 </script>
 
 <style>
-  .image-viewer-container {
-    position: fixed;
+.image-viewer-container {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  display: none;
+
+  &.show {
+    animation: backgroundFade .5s ease forwards;
+
     display: flex;
+  }
+
+  .close-control {
     top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0,0,0,0);
-    display: none;
+    right: 0;
+    color: #fff;
+    position: absolute;
+    padding: 2em;
+    z-index: 9999;
 
-    &.show {
-      animation: backgroundFade .5s ease forwards;
+    i {
+      width: 50px;
+      font-size: 2em;
+      cursor: pointer;
+    }
+  }
 
-      display: flex;
+  .image-viewer {
+    position: absolute;
+    max-width: 255px;
+    animation: imgZoom .5s ease forwards;
+
+    .description {
+      color: #fff;
+      background-color: rgba(0, 0, 0, .25);
+      padding: 1em;
     }
 
-    .close-control {
-      top: 0;
-      right: 0;
+    span.switcher {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4em;
       color: #fff;
+
+      width: 50px;
+      height: 100%;
       position: absolute;
-      padding: 2em;
-      z-index: 9999;
 
       i {
-        width: 50px;
-        font-size: 2em;
         cursor: pointer;
       }
-    }
 
-    .image-viewer {
-      position: absolute;
-      max-width: 255px;
-      animation: imgZoom .5s ease forwards;
-
-      .description {
-        color: #fff;
-        background-color: rgba(0,0,0,.25);
-        padding: 1em;
+      &.prev {
+        left: -50px;
       }
 
-      span.switcher {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 4em;
-        color: #fff;
+      &.next {
+        right: -50px;
+      }
 
-        width: 50px;
-        height: 100%;
-        position: absolute;
-
-        i { cursor: pointer; }
-
-        &.prev { left: -50px; }
-        &.next { right: -50px; }
-
-        @media screen and (max-width: 860px) {
-          &.prev { left: 0 }
-          &.next { right: 0 }
-          background-color: rgba(0, 0, 0, .25);
+      @media screen and (max-width: 860px) {
+        &.prev {
+          left: 0
         }
+
+        &.next {
+          right: 0
+        }
+
+        background-color: #00001A;
       }
     }
   }
+}
 </style>
