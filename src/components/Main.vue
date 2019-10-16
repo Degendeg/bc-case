@@ -1,21 +1,15 @@
 <template>
   <div class="container">
     <h1>Favorites</h1>
-	<hr />
+    <hr />
     <div class="row">
-      <user-card v-model="favoriteUsers()[i]"
-                 v-for="(user, i) in favoriteUsers()"
-                 :key="user.id"
-      />
+      <div class="no-fav-chosen" v-if="favoriteUsers().length < 1"><p>No favorite user chosen yet!</p></div>
+      <user-card v-model="favoriteUsers()[i]" v-for="(user, i) in favoriteUsers()" :key="user.id" />
     </div>
-
     <h1>Users</h1>
-	<hr />
+    <hr />
     <div class="row">
-      <user-card v-model="nonFavoritesUsers()[i]"
-                 v-for="(user, i) in nonFavoritesUsers()"
-                 :key="user.id"
-      />
+      <user-card v-model="nonFavoritesUsers()[i]" v-for="(user, i) in nonFavoritesUsers()" :key="user.id" />
     </div>
   </div>
 </template>
@@ -70,15 +64,11 @@ export default {
 </script>
 
 <style scoped>
+  .no-fav-chosen { margin-left: 15px; }
   .container {
     text-align: left;
-
     .row {
       margin: 1em 0;
-
-      div {
-
-      }
     }
   }
 </style>

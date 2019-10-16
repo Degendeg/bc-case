@@ -8,7 +8,7 @@
           <i class="far fa-star" v-else @click="addFavorite()"></i>
         </span>
       </h1>
-      <p><i>{{user.company.name}} – {{user.email.toLowerCase()}} – {{user.address.street}} {{user.address.suite}}, {{user.address.zipcode}} {{user.address.city}}</i></p>
+      <p class="user-info">{{user.company.name}} – {{user.email.toLowerCase()}} – {{user.address.street}} {{user.address.suite}}, {{user.address.zipcode}} {{user.address.city}}</p>
 	  <br />
 	  <h2 class="album-header"><strong>Album</strong></h2>
 	  <br />
@@ -67,7 +67,11 @@ export default {
 <style scoped>
   i.fas { color: #f1c40f; }
 
-  i:hover {
+  .header { margin-top: 50px; }
+
+  .user-info { font-style: italic; }
+
+  .fa-star:hover {
     color: #f1c40f;
     cursor: pointer;
   }
