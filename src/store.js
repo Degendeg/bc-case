@@ -10,7 +10,6 @@ export default new Vuex.Store({
     users: null,
     albums: null,
     photos: null,
-
     crumbs: []
   },
 
@@ -18,11 +17,12 @@ export default new Vuex.Store({
     initializeData(state) {
       state.isLoading = true
       const favorites = JSON.parse(window.localStorage.getItem('favorites')) || []
+	  const url = "https://jsonplaceholder.typicode.com/"
 
       Promise.all([
-          axios.get('https://jsonplaceholder.typicode.com/users'),
-          axios.get('https://jsonplaceholder.typicode.com/albums'),
-          axios.get('https://jsonplaceholder.typicode.com/photos'),
+          axios.get(url + 'users'),
+          axios.get(url + 'albums'),
+          axios.get(url + 'photos'),
         ])
         .then(result => {
           state.users = result[0].data.map(user => {

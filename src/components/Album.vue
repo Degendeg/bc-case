@@ -7,8 +7,8 @@
       </div>
       <div class="row">
         <div class="col-md-3 col-sm-4 col-sx-12" v-for="(photo, index) in photos" :key="photo.id">
-          <div class="card" :ref="`grid-img-${index}`" >
-            <img :src="photo.url" v-gallery class="card-img-top">
+          <div class="card">
+            <img :src="photo.url" v-gallery:photos class="card-img-top">
           </div>
         </div>
       </div>
@@ -22,6 +22,19 @@ import gallery from 'img-vuer'
 
 Vue.use(gallery,{
   isIndexShow: false,
+})
+
+window.addEventListener("keydown", e => {
+	const $imgVuer = Vue.prototype.$imgVuer;
+	if (e.key == 'ArrowRight') {
+		$imgVuer.next()
+	}
+	if (e.key == 'ArrowLeft') {
+		$imgVuer.prev()
+	}
+	if (e.key == 'Escape') {
+		$imgVuer.close()
+	}
 })
 
 export default {
@@ -91,6 +104,7 @@ export default {
 
   .card-img-top {
     cursor: pointer;
+	height: 200px;
   }
 
   .photos-amount {
